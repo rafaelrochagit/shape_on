@@ -79,7 +79,7 @@ function readConfig() {
     </style>
     <body>
     	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		    <a class="navbar-brand" href="<?=$base_url?>/">
+		    <a class="navbar-brand" href="<?=$base?>/">
 	    		<img src="<?=$base?>/icone-ferramenta.png" width="30px">
 	    	</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@ function readConfig() {
 		    <div class="collapse navbar-collapse" id="navbarColor01">
 		      <ul class="navbar-nav mr-auto">
 		        <li class="nav-item <?= $pagina == 'home' ? 'active' : '' ?>">
-		          <a class="nav-link" href="<?=$base_url?>/">Home</a>
+		          <a class="nav-link" href="<?=$base?>/">Home</a>
 		        </li>
 		        <li class="nav-item <?= $pagina == 'tabelas' ? 'active' : '' ?>">
 		          <a class="nav-link" href="#">Outros</a>
