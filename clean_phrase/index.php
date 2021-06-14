@@ -58,6 +58,18 @@
 	            	</div>
 	            </div>
 
+
+	            <div class="form-group row mt-4">
+	            	<div class="col-2">
+	            		<h5>Só primeira maiúscula</h5>
+	            	</div>
+	            	<div class="col">
+		            	<div class="input-group">
+					        <input id="soPrimeiraMaiuscula" class="form-control" placeholder="" value=""> 
+				      	</div>
+	            	</div>
+	            </div>
+
 	            <div class="form-group row mt-4">
 	            	<div class="col-2">
 	            		<h5>Cammon Case Maiusculo</h5>
@@ -101,11 +113,13 @@
 	function clean() {
 		const frase = $("#frase").val()
 		const fraseSemAcentos = limpaAcentos(frase)
+		const fraseSoPrimeiraMaiuscula = soPrimeiraMaiuscula(fraseSemAcentos)
 		const fraseCammonCase = cammonCase(fraseSemAcentos)
 		const fraseCammonCaseMaiuculo = cammonCaseMaiusculo(fraseSemAcentos)
 		const fraseComTraco = comTraco(fraseSemAcentos)
 
 		$("#fraseSemAcentos").val(fraseSemAcentos)
+		$("#fraseSoPrimeiraMaiuscula").val(fraseSoPrimeiraMaiuscula)
 		$("#fraseCammonCase").val(fraseCammonCase)
 		$("#fraseCammonCaseMaiuculo").val(fraseCammonCaseMaiuculo)
 		$("#fraseComTraco").val(fraseComTraco)
@@ -140,6 +154,17 @@
 
 		return frase
 	}
+
+	function soPrimeiraMaiuscula(str) {
+
+		let frase = str.split(' ')
+				   .map(w => w.toLowerCase())
+				   .join(' ')
+
+		frase = frase.charAt(0).toUpperCase() + frase.slice(1);
+		return frase
+	}
+
 
 </script>
 <?php require_once '../footer.php'; ?>
