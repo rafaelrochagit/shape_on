@@ -1,9 +1,8 @@
 <?php
-$base_url = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/simuladores/";
-
-require_once $base_url.'inss/INSS.php'; 
-
 error_reporting(E_ALL);
+
+$base_url = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/ferramentas/";
+
 date_default_timezone_set('America/Sao_Paulo');
 $pagina = isset($page) ? $page : 'home';
 
@@ -15,14 +14,8 @@ unset($_SESSION["msgSuccess"]);
 $erroForm = isset($_SESSION["erroForm"]) ? $_SESSION["erroForm"] : null;
 unset($_SESSION["erroForm"]);
 
-$inss = new INSS();
-
-$config = readConfig();
-$tabelaNome = isset($config['tabela_inss']) ? $config['tabela_inss'] : '';
-$tabelaCarregada = $inss->read($tabelaNome); 
-
 function readConfig() {
-	$filepath = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/simuladores/configuracoes/config.json";
+	$filepath = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/ferramentas/configuracoes/config.json";
 	$configuracaoJson = file_get_contents($filepath);
 
     $configuracoes = array();
@@ -98,12 +91,6 @@ function readConfig() {
 		        </li>
 		        <li class="nav-item <?= $pagina == 'tabelas' ? 'active' : '' ?>">
 		          <a class="nav-link" href="#">Outros</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Pricing</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">About</a>
 		        </li>
 		      </ul>
 		    </div>
