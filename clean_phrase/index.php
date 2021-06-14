@@ -39,7 +39,7 @@
 			      	</div>
             	</div>
             	<div class="col-2">
-            		<button class="btn btn-primary" onclick="clean()">Limpar</button>
+            		<button class="btn btn-primary" onclick="clean()"> > </button>
             	</div>
             </div>
             
