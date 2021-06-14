@@ -70,6 +70,17 @@
 	            	</div>
 	            </div>
 
+	             <div class="form-group row mt-4">
+	            	<div class="col-2">
+	            		<h5>Minúscula</h5>
+	            	</div>
+	            	<div class="col">
+		            	<div class="input-group">
+					        <input id="fraseMinuscula" class="form-control" placeholder="" value=""> 
+				      	</div>
+	            	</div>
+	            </div>
+
 	            <div class="form-group row mt-4">
 	            	<div class="col-2">
 	            		<h5>Cammon Case Maiusculo</h5>
@@ -114,12 +125,14 @@
 		const frase = $("#frase").val()
 		const fraseSemAcentos = limpaAcentos(frase)
 		const fraseSoPrimeiraMaiuscula = soPrimeiraMaiuscula(fraseSemAcentos)
+		const fraseMinuscula = minuscula(fraseSemAcentos)
 		const fraseCammonCase = cammonCase(fraseSemAcentos)
 		const fraseCammonCaseMaiuculo = cammonCaseMaiusculo(fraseSemAcentos)
 		const fraseComTraco = comTraco(fraseSemAcentos)
 
 		$("#fraseSemAcentos").val(fraseSemAcentos)
 		$("#fraseSoPrimeiraMaiuscula").val(fraseSoPrimeiraMaiuscula)
+		$("#fraseMinuscula").val(fraseMinuscula)
 		$("#fraseCammonCase").val(fraseCammonCase)
 		$("#fraseCammonCaseMaiuculo").val(fraseCammonCaseMaiuculo)
 		$("#fraseComTraco").val(fraseComTraco)
@@ -155,12 +168,15 @@
 		return frase
 	}
 
-	function soPrimeiraMaiuscula(str) {
-
+	function minuscula(str) {
 		let frase = str.split(' ')
-				   .map(w => w.toLowerCase())
-				   .join(' ')
+			   .map(w => w.toLowerCase())
+			   .join(' ')
+		return frase
+	}
 
+	function soPrimeiraMaiuscula(str) {
+		frase = minuscula(str)
 		frase = frase.charAt(0).toUpperCase() + frase.slice(1);
 		return frase
 	}
