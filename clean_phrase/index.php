@@ -58,6 +58,17 @@
 	            	</div>
 	            </div>
 
+	            <div class="form-group row mt-4">
+	            	<div class="col-2">
+	            		<h5>Cammon Case Maiusculo</h5>
+	            	</div>
+	            	<div class="col">
+		            	<div class="input-group">
+					        <input id="fraseCammonCaseMaiuculo" class="form-control" placeholder="" value=""> 
+				      	</div>
+	            	</div>
+	            </div>
+
              	<div class="form-group row mt-4">
 	            	<div class="col-2">
 	            		<h5>Cammon Case</h5>
@@ -91,10 +102,12 @@
 		const frase = $("#frase").val()
 		const fraseSemAcentos = limpaAcentos(frase)
 		const fraseCammonCase = cammonCase(fraseSemAcentos)
+		const fraseCammonCaseMaiuculo = cammonCaseMaiusculo(fraseSemAcentos)
 		const fraseComTraco = comTraco(fraseSemAcentos)
 
 		$("#fraseSemAcentos").val(fraseSemAcentos)
 		$("#fraseCammonCase").val(fraseCammonCase)
+		$("#fraseCammonCaseMaiuculo").val(fraseCammonCaseMaiuculo)
 		$("#fraseComTraco").val(fraseComTraco)
 		
 	}
@@ -104,12 +117,18 @@
 	}
 
 	function cammonCase(str) {
+		let frase = cammonCaseMaiusculo(str)
+
+		frase = frase.charAt(0).toLowerCase() + frase.slice(1);
+		return frase
+	}
+
+	function cammonCaseMaiusculo(str) {
 
 		let frase = str.split(' ')
 				   .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
 				   .join('')
 
-		frase = frase.charAt(0).toLowerCase() + frase.slice(1);
 		return frase
 	}
 
