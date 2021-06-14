@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_ALL);
 
-$base_url = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/ferramentas/";
+$base_url = __DIR__."/";
+if($_SERVER['HTTP_HOST'] == 'localhost') $base = "/ferramentas";
+else $base = "";
 
 date_default_timezone_set('America/Sao_Paulo');
 $pagina = isset($page) ? $page : 'home';
@@ -29,7 +31,7 @@ function readConfig() {
 <html>
     <head>
 	 	<title>Ferramentas</title>
-     	<link rel="shortcut icon" type="image/x-icon" href="/ferramentas/icone-ferramenta.png">
+     	<link rel="shortcut icon" type="image/x-icon" href="<?=$base?>/icone-ferramenta.png">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
@@ -78,7 +80,7 @@ function readConfig() {
     <body>
     	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		    <a class="navbar-brand" href="/ferramentas">
-	    		<img src="/ferramentas/icone-ferramenta.png" width="30px">
+	    		<img src="<?=$base?>/icone-ferramenta.png" width="30px">
 	    	</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
