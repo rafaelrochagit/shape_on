@@ -65,7 +65,7 @@
 	            	</div>
 	            	<div class="col">
 		            	<div class="input-group">
-					        <input id="soPrimeiraMaiuscula" class="form-control" placeholder="" value=""> 
+					        <input id="fraseSoPrimeiraMaiuscula" class="form-control" placeholder="" value=""> 
 				      	</div>
 	            	</div>
 	            </div>
