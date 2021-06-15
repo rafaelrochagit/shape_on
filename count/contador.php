@@ -25,9 +25,7 @@ $counts = getFromArray($form, 'count', array());
 	   	<form class="forms-sample d-print-none" action="salvar.php" method="post" style="border-bottom: 1px solid;">
 	   		<div class="row">
 				<div class="col-9">
-					<?php if($usuarioLogado): ?>
-						<a class="btn btn-info" href="lista.php">Lista</a>
-					<?php endif; ?>
+					<a class="btn btn-info" href="lista.php">Lista</a>
 				</div>
 				<div class="col-1 mt-1">
 					<b>COD</b>		
