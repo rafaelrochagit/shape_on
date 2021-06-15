@@ -1,31 +1,5 @@
 <?php
-error_reporting(E_ALL);
-
-$base_url = __DIR__."/";
-if($_SERVER['HTTP_HOST'] == 'localhost') $base = "/ferramentas";
-else $base = "";
-
-date_default_timezone_set('America/Sao_Paulo');
-$pagina = isset($page) ? $page : 'home';
-
-session_start();
-$msg = isset($_SESSION["msg"]) ? $_SESSION["msg"] : null;
-unset($_SESSION["msg"]);
-$msgSuccess = isset($_SESSION["msgSuccess"]) ? $_SESSION["msgSuccess"] : null;
-unset($_SESSION["msgSuccess"]);
-$erroForm = isset($_SESSION["erroForm"]) ? $_SESSION["erroForm"] : null;
-unset($_SESSION["erroForm"]);
-
-function readConfig() {
-	$filepath = $_SERVER['CONTEXT_DOCUMENT_ROOT']."/ferramentas/configuracoes/config.json";
-	$configuracaoJson = file_get_contents($filepath);
-
-    $configuracoes = array();
-    if($configuracaoJson) {
-        $configuracoes = json_decode($configuracaoJson, true);
-    }
-    return $configuracoes;
-}
+require_once 'shared.php'; 	
 
 ?>
 <html>
