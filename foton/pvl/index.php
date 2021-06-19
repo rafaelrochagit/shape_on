@@ -209,7 +209,7 @@
 
 		let newVal = complementoAEsquerda+inputVal
 		$('#'+index).val(newVal)
-		//gerarString()
+		gerarString()
 
 	}
 
