@@ -109,7 +109,7 @@
 	function gerar() {
 		const jsonPvl = $("#jsonPvl").val()
 		const objPvl = JSON.parse(jsonPvl)
-
+		$('#result').empty()
 		for (var index in objPvl) {
 			let input = formInput(index, objPvl)
 			$('#result').append(input)
