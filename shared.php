@@ -9,9 +9,11 @@ else $base = "";
 ob_start();
 require_once $base_url.'util.php'; 	
 require_once $base_url.'count/COUNT.php'; 	
+require_once $base_url.'foton/pvl/PVL.php'; 	
 
 
 $count = new COUNT();
+$pvl = new PVL();
 
 date_default_timezone_set('America/Sao_Paulo');
 $pagina = isset($page) ? $page : 'home';
@@ -27,15 +29,19 @@ $erroForm = isset($_SESSION["erroForm"]) ? $_SESSION["erroForm"] : null;
 unset($_SESSION["erroForm"]);
 
 $codCountAtual = isset($_GET['codCount']) ? $_GET['codCount'] : '';
-
 $codCount = getIdUsuario();
-
 $counts = $count->readSimulacoes();
 $countResult = isset($counts["count".$codCountAtual]) ? $counts["count".$codCountAtual] : null;
+
+$codPvlAtual = isset($_GET['codPvl']) ? $_GET['codPvl'] : '';
+$codPvl = getIdUsuario();
+$pvls = $pvl->read();
+$pvlResult = isset($pvls["pvl".$codPvlAtual]) ? $pvls["pvl".$codPvlAtual] : null;
 
 $simulacoesCount = $count->readSimulacoes();
 
 if($codCountAtual != '') $codCount = $codCountAtual;
+if($codPvlAtual != '') $codPvl = $codPvlAtual;
 
 $config = readConfig();
 
