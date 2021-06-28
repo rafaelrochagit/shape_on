@@ -139,5 +139,17 @@
 			showMessage("Error!", msg)
 		}
 
+		function timeOutHide(id, timeInSeconds) {
+			const time = timeInSeconds * 1000
+			const selector = '#'+id
+			if($(selector).attr('isShow') == undefined || $(selector).attr('isShow') == 'false') {
+				$(selector).attr('isShow', 'true');
+				setTimeout(function(){ 
+					 $(selector).hide();
+					 $(selector).attr('isShow', 'false');
+				}, time);
+			}
+		}
+
     </script>
 </html>

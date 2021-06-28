@@ -7,7 +7,7 @@
 $form = $_POST;
 $codPvl = isset($form['codPvl']) ? $form['codPvl'] : '';
 $pvl->form($form);
-
+$_SESSION["msgSuccess"] = 'PVL salva!';
 header("Location: index.php?codPvl=" . $codPvl);
 
 
