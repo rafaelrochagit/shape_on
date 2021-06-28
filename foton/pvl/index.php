@@ -43,6 +43,15 @@
     	margin-top: -2px;
 	}
 
+	.modal-body pre {
+	    max-height: 30vw;
+    	overflow: auto;
+	}
+
+	.display-none {
+		display: none;
+	}
+
 </style>
 	
 	<div class="row mb-3">
@@ -51,26 +60,34 @@
 		</div>
 	</div>
 	<div class="card">
-	  <div class="card-header" style="font-size: 20pt;">
-	    PVL
+	  <div class="card-header" style="font-size: 20pt; display: flex;">
+	  	<div class="col text-left">
+	    	PVL
+		</div>
+	    <div class="col text-right">
+			<button class="btn btn-dark" type="submit">Salvar</button>
+		</div>
 	  </div>
 	  <div class="card-body">
+	  	<div class="row">
+	  		<div class="col">
+	   			<a href="index.php" class="btn btn-info">Novo</a>
+			</div>
+	  	</div>
 	  	<form class="forms-sample d-print-none mt-5" action="salvar.php" method="post" style="border-bottom: 1px solid;">
 		    <div class="row">
-		    	<div class="col-7">
+		    	<div class="col-8">
 		    		 <h4 class="card-title text-left mb-5">Gera partição variável string</h4>
 		    	</div>
 				<div class="col-1 mt-1">
 					<b>COD</b>		
 				</div>
-				<div class="col-2">
+				<div class="col-3">
 					<div class="form-group text-left">
 						<input id="codPvl" class="form-control" type="number" name="codPvl" value="<?= $codPvl?>">
 					</div>
 				</div>
-				<div class="col-2 text-center">
-					<button class="btn btn-dark"  type="submit">Salvar</button>
-				</div>
+				
 			</div>
 		   	<div class="forms-sample"  
 		   		style="border-bottom: 1px solid;">
@@ -79,14 +96,23 @@
 	            		<h5>PVL JSON</h5>
 	            	</div>
 				</div>
-	            <div class="form-group row">
+	            <div id="inputPvl" class="form-group row <?=isset($pvlResult['jsonPvl']) ? 'display-none' : ''?>">
 	            	<div class="col-10">
 		            	<div class="input-group">
 					        <textarea id="jsonPvl" class="form-control" placeholder="" name="jsonPvl" value=""><?= $pvlResult["jsonPvl"] ?></textarea> 
 				      	</div>
+	            		<a class="" onclick="cancelarEdicaoPvl()">Cancelar Edição</a>
 	            	</div>
 	            	<div class="col-2">
 	            		<a class="btn btn-primary" onclick="gerar()"> > </a>
+	            	</div>
+	            </div>
+             	<div id="inputPvlActions" class="form-group row <?=isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>">
+	            	<div class="col-1">
+		            	<a class="" onclick="verPvl()">Ver</a>
+	            	</div>
+	            	<div class="col-1">
+	            		<a class="" onclick="editarPvl()">Editar</a>
 	            	</div>
 	            </div>
 	        </div>
@@ -99,15 +125,28 @@
 
 	        	<div class="form-group row">
 	        		<div class="col">
-	        			<pre id="particaoVariavel"></pre>
+	        			<input id="particaoVariavel" type="text" onchange="stringChange()"  
+	        			class="form-control  <?= isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>"></input>
+	        			<span id="erroString" class="display-none" style="color:red;">String com erro</span>
 	        		</div>
 	        	</div>
 
-	        	<div class="row">
+	        	<div class="row mb-3">
 					<div class="col text-center">
-						<a id="gerarString" class="btn btn-primary" onclick="gerarString()">Atualizar String Partição</a>
+						<a id="gerarString" class="btn btn-primary" onclick="atualizarString()">Atualizar String Partição</a>
 					</div>
 				</div>
+				<div class="row mb-3">
+					<div class="col text-center">
+						<a id="gerarString" class="btn btn-warning" onclick="resetUltimaStringValida()">Reset para última String válida</a>
+					</div>
+				</div>
+
+				<div class="form-group row mt-5">
+	    			<div class="col">
+	        			<h5>Varíaveis da String Partição Variável</h5>
+	    			</div>
+	        	</div>
 				
 	        	<div id="result" class="forms-sample">
 	        		<?php foreach($pvlResult['pvl'] as $index => $obj): ?>
@@ -152,15 +191,51 @@
         </form>
 	  </div>
 	</div>
+
+    <div class="modal fade" id="modalPVL" tabindex="-1" role="dialog" aria-labelledby="modalAlertTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="modalAlertTitle">PVL</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <?= $pvlResult["jsonPvl"] ?>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 <?php require_once '../../footer.php'; ?>
 <script type="text/javascript">
+	var valorStringParticaoVariavel = ''
+	var tamanhoString = 0
+	var jsonPvlConsolidado = ''
 
 	$(document).ready(function(){
-		gerarString()
+		gerarString(true)
 	});
+
+	function verPvl() {
+		const jsonPvl = $("#jsonPvl").val()
+		$('#modalPVL .modal-body').html('<pre>'+jsonPvl+'</pre>');
+		$('#modalPVL').modal('show');
+	}
+
+	function editarPvl() {
+		$('#inputPvl').css('display', 'flex');
+		$('#inputPvlActions').hide();
+	}
+
+	function cancelarEdicaoPvl() {
+		$('#inputPvl').hide();
+		$('#inputPvlActions').show();
+	}
 	
 	function gerar() {
 		const jsonPvl = $("#jsonPvl").val()
+		jsonPvlConsolidado = jsonPvl
 		const objPvl = JSON.parse(jsonPvl)
 		$('#result').empty()
 		for (var index in objPvl) {
@@ -168,7 +243,8 @@
 			$('#result').append(input)
 		}
 
-		gerarString()
+		//gerarString()
+		cancelarEdicaoPvl();
 	}
 
 	function formInput(index, obj) {
@@ -269,8 +345,12 @@
 
 	}
 
-	function gerarString() {
-		const jsonPvl = $("#jsonPvl").val()
+	function gerarString(isFirstChargePage = false) {
+		if(isFirstChargePage){
+			jsonPvlConsolidado = $("#jsonPvl").val()
+		}
+		
+		const jsonPvl = jsonPvlConsolidado
 		const objPvl = JSON.parse(jsonPvl)
 
 		let valor = ""
@@ -279,8 +359,58 @@
 			valor = valor + inputVal
 		}
 
-		$('#particaoVariavel').text(valor)
+		tamanhoString = valor.length
+		valorStringParticaoVariavel = valor
+		$('#particaoVariavel').val(valor)
+		$('#particaoVariavel').show()
+		if(!isFirstChargePage) successMessage('Valor String Partição Variável atualizado')
 	}
+
+	function stringChange() {
+		const jsonPvl = jsonPvlConsolidado
+		const objPvl = JSON.parse(jsonPvl)
+		const novaString = $('#particaoVariavel').val()
+		if(tamanhoString != novaString.length) {
+			const msg = 'Novo tamanho da string('+novaString.length+') não condiz com o tamanho correto('+tamanhoString+')'
+			//errorMessage(msg)
+			errorString(msg)
+			return
+		}
+		valorStringParticaoVariavel = novaString
+		stringOk()
+		for (var index in objPvl) {
+			const posicaoInicio = objPvl[index]['posicao-de-inicio']
+			const posicaoFinal = posicaoInicio + objPvl[index]['tamanho']
+			$('#'+index).val(novaString.substring(posicaoInicio, posicaoFinal))
+		}
+		successMessage("Inputs de Varíaveis da String Partição Variável atualizados")
+
+	}
+
+	function atualizarString() {
+		if($('#particaoVariavel').val() != valorStringParticaoVariavel) {
+			stringChange();
+		} else {
+			gerarString();
+		}
+	}
+
+	function resetUltimaStringValida() {
+		$('#particaoVariavel').val(valorStringParticaoVariavel)
+		stringChange();
+	}
+
+	function errorString(msg='') {
+		$('#particaoVariavel').css('border', '1px solid red');
+		if(msg != '') $('#erroString').text(msg)
+		$('#erroString').show();
+	}
+
+	function stringOk() {
+		$('#particaoVariavel').css('border', '1px solid #ced4da;');
+		$('#erroString').hide();
+	}
+
 </script>
 
 

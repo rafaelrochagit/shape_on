@@ -124,7 +124,7 @@
 		};
 
 		function showMessage(title, msg) {
-			$('#modalAlertTitle').text(title);
+			$('#modalAlert .modal-title').text(title)
 			$('#modalAlert .modal-body').text(msg)
 			$('#modalAlert').modal('show')
 		}
