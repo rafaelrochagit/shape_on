@@ -1,0 +1,6 @@
+[15-Jun-2021 02:29:25 America/Fortaleza] PHP Warning:  require_once(MEI.php): failed to open stream: No such file or directory in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
+[15-Jun-2021 02:29:25 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required 'MEI.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
+[15-Jun-2021 02:33:33 America/Fortaleza] PHP Warning:  require_once(MEI.php): failed to open stream: No such file or directory in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
+[15-Jun-2021 02:33:33 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required 'MEI.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
+[15-Jun-2021 02:36:22 America/Fortaleza] PHP Warning:  require_once(MEI.php): failed to open stream: No such file or directory in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
+[15-Jun-2021 02:36:22 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required 'MEI.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/roupas89/ferramentas.estaon.com.br/count/excluir.php on line 2
