@@ -84,7 +84,7 @@
 					</div>
 					<div class="col-3">
 						<div class="form-group text-left">
-							<input id="codPvl" class="form-control" type="number" name="codPvl" value="<?= $codPvl?>">
+							<input id="codPvl" class="form-control" type="text" name="codPvl" value="<?= $codPvl?>">
 						</div>
 					</div>
 					
