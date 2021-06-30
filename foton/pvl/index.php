@@ -106,7 +106,7 @@
 		            		<a class="" onclick="cancelarEdicaoPvl()">Cancelar Edição</a>
 		            	</div>
 		            	<div class="col-2">
-		            		<a class="btn btn-primary" onclick="gerar()"> > </a>
+		            		<a class="btn btn-primary" onclick="gerar()"> Gerar > </a>
 		            	</div>
 		            </div>
 	             	<div id="inputPvlActions" class="form-group row <?=isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>">
@@ -118,7 +118,7 @@
 		            	</div>
 		            </div>
 		        </div>
-		        <div>
+		        <div id="pvlResultContainer" class="display-none">
 		        	
 		    		<div class="form-group row mt-5">
 		    			<div class="col">
@@ -274,6 +274,16 @@
 	
 	function gerar() {
 		const jsonPvl = $("#jsonPvl").val()
+		if(!isJson(jsonPvl)) {
+			$("#jsonPvl").val(jsonPvlConsolidado)
+			errorMessage("Entrada NÃO é um json válido. Valor Restaurado para ultima entrada válida.");
+			return;
+		} else if(!isJsonPvlValido(jsonPvl)) {
+			$("#jsonPvl").val(jsonPvlConsolidado)
+			errorMessage("Entrada é um json válido, mas NÃO tem o formato correto de uma pvl.json, valor restaurado para ultima entrada válida.");
+			return;
+		}
+
 		jsonPvlConsolidado = jsonPvl
 		const objPvl = JSON.parse(jsonPvl)
 		$('#result').empty()
@@ -283,7 +293,9 @@
 		}
 
 		gerarString()
-		cancelarEdicaoPvl();
+		stringChange()
+		cancelarEdicaoPvl()
+		$('#pvlResultContainer').show();
 	}
 
 	function formInput(index, obj) {
@@ -387,7 +399,11 @@
 
 	function gerarString(isFirstChargePage = false) {
 		if(isFirstChargePage){
-			jsonPvlConsolidado = $("#jsonPvl").val()
+			const jsonPvl = $("#jsonPvl").val()
+			if(isJson(jsonPvl)) {
+				jsonPvlConsolidado = jsonPvl
+				$('#pvlResultContainer').show();
+			}
 		}
 		
 		const jsonPvl = jsonPvlConsolidado
@@ -479,6 +495,30 @@
 	function stringOk() {
 		$('#particaoVariavel').css('border', '1px solid #ced4da;');
 		$('#erroString').hide();
+	}
+
+	function isJsonPvlValido(jsonPvl) {
+		const objPvl = JSON.parse(jsonPvl)
+		let isJsonVazio = true
+
+		if(isJson(jsonPvl)) {
+			for (var index in objPvl) {
+				isJsonVazio = false;
+				if(
+					objPvl[index]['posicao-de-inicio'] == undefined ||
+					objPvl[index]['tamanho'] == undefined ||
+					objPvl[index]['tipo'] == undefined 
+				) {
+					return false
+				}
+			}
+		} else {
+			return false
+		}
+
+		if(isJsonVazio) return false;
+		return true
+		
 	}
 
 </script>
