@@ -461,13 +461,13 @@
 	function successAlertString(msg) {
 		$('#alertString .alertContent').text(msg);
 		$('#alertString').show();
-		timeOutHide('alertString', 5);
+		timeOutHide('alertString', 3);
 	}
 
 	function successAlertVariaveis(msg) {
 		$('#alertVariaveis .alertContent').text(msg);
 		$('#alertVariaveis').show();
-		timeOutHide('alertVariaveis', 5);	
+		timeOutHide('alertVariaveis', 3);	
 	}
 
 	function errorString(msg='') {
