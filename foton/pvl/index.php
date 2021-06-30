@@ -106,7 +106,7 @@
 		            		<a class="" onclick="cancelarEdicaoPvl()">Cancelar Edição</a>
 		            	</div>
 		            	<div class="col-2">
-		            		<a class="btn btn-primary" onclick="gerar()"> Gerar > </a>
+		            		<a class="btn btn-primary" onclick="gerarSubmit()"> Gerar > </a>
 		            	</div>
 		            </div>
 	             	<div id="inputPvlActions" class="form-group row <?=isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>">
@@ -245,6 +245,28 @@
 		    </div>
 		  </div>
 		</div>
+
+		 <div class="modal fade" id="modalConfirmaGerar" tabindex="-1" role="dialog" aria-labelledby="modalAlertTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-md" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Deseja continuar?</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		       	<b>'String Partição Variável'</b> e <b>'Varíaveis da String Partição Variável'</b><br> serão resetadas!
+		      </div>
+		      <div class="modal-footer">
+		      	<div class="col text-left">
+					<a class="btn btn-dark" onclick="gerarConfirmado()">Sim</a>
+					<a class="btn btn-warning" data-dismiss="modal" aria-label="Close">Não</a>
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</form>
 <?php require_once '../../footer.php'; ?>
 <script type="text/javascript">
@@ -271,8 +293,8 @@
 		$('#inputPvl').hide();
 		$('#inputPvlActions').show();
 	}
-	
-	function gerar() {
+
+	function gerarSubmit() {
 		const jsonPvl = $("#jsonPvl").val()
 		if(!isJson(jsonPvl)) {
 			$("#jsonPvl").val(jsonPvlConsolidado)
@@ -284,6 +306,20 @@
 			return;
 		}
 
+		if($('#pvlResultContainer').css('display') == 'none') {
+			gerar()
+		} else {
+			$('#modalConfirmaGerar').modal('show');
+		}
+	}
+
+	function gerarConfirmado() {
+		$('#modalConfirmaGerar').modal('hide');
+		gerar();
+	}
+
+	function gerar() {
+		const jsonPvl = $("#jsonPvl").val()
 		jsonPvlConsolidado = jsonPvl
 		const objPvl = JSON.parse(jsonPvl)
 		$('#result').empty()
