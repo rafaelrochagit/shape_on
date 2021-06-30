@@ -12,7 +12,9 @@
 		$tabela['faixa4'] = array("piso"=>"","teto"=>"","percent"=>"","max"=>"");
 		$tabela['teto'] = "";
 	}
+
 ?>
+
 
 <style type="text/css">
 	.indexJson {
@@ -126,8 +128,15 @@
 
 		        	<div class="form-group row">
 		        		<div class="col-11">
-		        			<input id="particaoVariavel" type="text"
-		        			class="form-control  <?= isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>"></input>
+		        			<div class="input-group">
+			        			<input id="particaoVariavel" type="text"
+			        			class="form-control  <?= isset($pvlResult['jsonPvl']) ? '' : 'display-none'?>"></input>
+		        			 	<div class="input-group-append">
+						          <div class="input-group-text" style="cursor: pointer;" onclick="copyToClipBoard()">
+						          	<i class="fa fa-clipboard" title="Copiar" aria-hidden="true"></i>
+						          </div>
+						        </div>
+					        </div>
 		        			<span id="erroString" class="display-none" style="color:red;">String com erro</span>
 		        			<div id="alertString" class="col display-none p-1">
 								<div class="alert alert-success p-1 mb-0" role="alert">
@@ -139,6 +148,7 @@
 							</div>
 		        		</div>
 		        		<div class="col-1">
+		        			
 							<a class="btn btn-danger" onclick="resetUltimaStringValida()">Reset</a>
 						</div>
 		        	</div>
@@ -426,6 +436,21 @@
 		} else {
 			gerarString();
 		}
+	}
+
+	function copyToClipBoard() {
+	  /* Get the text field */
+	  var copyText = document.getElementById("particaoVariavel");
+
+	  /* Select the text field */
+	  copyText.select();
+	  copyText.setSelectionRange(0, 999999999); /* For mobile devices */
+
+	  /* Copy the text inside the text field */
+	  document.execCommand("copy");
+
+	  /* Alert the copied text */
+	  successAlertString("Copiado")
 	}
 
 	function resetUltimaStringValida() {
