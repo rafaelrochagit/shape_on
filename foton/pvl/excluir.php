@@ -1,17 +1,17 @@
 <?php
-require_once 'COUNT.php'; 
+require_once 'PVL.php'; 
 session_start();
 
-$count = new COUNT();
+$pvl = new PVL();
 
-$simulacoesCount = $count->readSimulacoes();
-$codSimulacaoCountAtual = isset($_GET['codCount']) ? $_GET['codCount'] : null;
+$simulacoes = $pvl->read();
+$codSimulacaoPvlAtual = isset($_GET['codPvl']) ? $_GET['codPvl'] : null;
 
-if($codSimulacaoCountAtual != null) {
+if($codSimulacaoPvlAtual != null) {
 
-    unset($simulacoesCount['count'.$codSimulacaoCountAtual]);
-    $count->salvarSimulacoes($simulacoesCount);
-    $_SESSION["msgSuccess"] = "Simulação ".$codSimulacaoCountAtual." excluída com sucesso!";
+    unset($simulacoes['pvl'.$codSimulacaoPvlAtual]);
+    $pvl->salvar($simulacoes);
+    $_SESSION["msgSuccess"] = "Simulação ".$codSimulacaoPvlAtual." excluída com sucesso!";
 } else {
     $_SESSION["msg"] = "Simulação não encontrada";
 }
