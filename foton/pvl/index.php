@@ -54,6 +54,10 @@
 		display: none;
 	}
 
+	nav {
+		display: none;
+	}
+
 </style>
 	<form class="forms-sample d-print-none mt-5" action="salvar.php" method="post">
 		<div class="row mb-3">
