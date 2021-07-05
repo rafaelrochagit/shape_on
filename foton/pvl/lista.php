@@ -7,6 +7,15 @@
         return $dt1 > $dt2 ? -1 : 1;
     });
 ?>
+
+    <style>
+
+        nav {
+            display: none !important;
+        }
+
+    </style>
+
 	<div class="row mb-3">
 		<div class="col">
 			<a class="btn btn-primary" href="index.php">Voltar</a>
