@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . "/../../config.php";
+require_once __DIR__ ."/../../config.php";
 require_once $base_util_path. "util.php";
 
-class PVL
+class Exercicio
 {
 
     private $filepath = __DIR__ . "/";
@@ -30,12 +30,12 @@ class PVL
 
     function read()
     {
-        $bdJson = @file_get_contents($this->filepath . "/bd/pvls.json");
-        $pvls = array();
+        $bdJson = @file_get_contents("bd/exercicios.json");
+        $json = array();
         if ($bdJson) {
-            $pvls = json_decode($bdJson, true);
+            $json = json_decode($bdJson, true);
         }
-        return $pvls;
+        return $json;
     }
 
     function form($form) {

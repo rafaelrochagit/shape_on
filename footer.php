@@ -1,12 +1,10 @@
- </main>			
-	  	<script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js">
-        </script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="<?=$base?>/js/mask.money.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+ 
+ 		</main>	
+		 		
+		<!-- js -->
+        <script type="text/javascript" src="<?=$base?>/assets/js/mask.money.min.js"></script>
+        <script type="text/javascript" src="<?=$base?>/assets/js/jquery.mask-1.14.16.js"></script>
+        <script type="text/javascript" src="<?=$base?>/assets/js/jquery.maskedinput-1.4.1.min.js"></script>
     </body>
 
     <div class="modal fade" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="modalAlertTitle" aria-hidden="true">

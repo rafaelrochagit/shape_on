@@ -1,19 +1,10 @@
 <?php
-error_reporting(E_ALL);
-error_reporting(E_ERROR);
-
-$base_url = __DIR__."/";
-if($_SERVER['HTTP_HOST'] == 'localhost') $base = "/ferramentas";
-else $base = "";
+require_once 'config.php'; 	
 
 ob_start();
-require_once $base_url.'util.php'; 	
-require_once $base_url.'count/COUNT.php'; 	
-require_once $base_url.'foton/pvl/PVL.php'; 	
+require_once $base_util_path.'util.php'; 	
+require_once $base_path.'foton/pvl/PVL.php'; 	
 
-
-$count = new COUNT();
-$pvl = new PVL();
 
 date_default_timezone_set('America/Sao_Paulo');
 $pagina = isset($page) ? $page : 'home';
@@ -28,19 +19,13 @@ unset($_SESSION["msgSuccess"]);
 $erroForm = isset($_SESSION["erroForm"]) ? $_SESSION["erroForm"] : null;
 unset($_SESSION["erroForm"]);
 
-$codCountAtual = isset($_GET['codCount']) ? $_GET['codCount'] : '';
-$codCount = getIdUsuario();
-$counts = $count->readSimulacoes();
-$countResult = isset($counts["count".$codCountAtual]) ? $counts["count".$codCountAtual] : null;
+$pvl = new PVL();
 
 $codPvlAtual = isset($_GET['codPvl']) ? $_GET['codPvl'] : '';
 $codPvl = getIdUsuario();
 $pvls = $pvl->read();
 $pvlResult = isset($pvls["pvl".$codPvlAtual]) ? $pvls["pvl".$codPvlAtual] : null;
 
-$simulacoesCount = $count->readSimulacoes();
-
-if($codCountAtual != '') $codCount = $codCountAtual;
 if($codPvlAtual != '') $codPvl = $codPvlAtual;
 
 $config = readConfig();

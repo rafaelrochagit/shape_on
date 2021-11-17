@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "titulo": "Supino reto barra",
+        "musculos": [1],
+        "execucao": "supino-reto-barra.gif"
+    },
+    {
+        "id": 2,
+        "titulo": "Desenvolvimento de ombros com halteres",
+        "musculos": [2],
+        "execucao": "desenvolvimento-para-ombros-com-halteres.gif"
+    },
+    {
+        "id": 3,
+        "titulo": "Elevação lateral de ombros com halteres",
+        "musculos": [2],
+        "execucao": "elevacao-lateral-de-ombros-com-halteres.gif"
+    },
+    {
+        "id": 4,
+        "titulo": "Tríceps mergulho com dois bancos",
+        "musculos": [3],
+        "execucao": "triceps-mergulho-apoiado-em-dois-bancos.gif"
+    },
+    {
+        "id": 5,
+        "titulo": "Tríceps mergulho no banco com perna flexionada",
+        "musculos": [3],
+        "execucao": "triceps-mergulho-no-banco-com-perna-flexionada.gif"
+    },
+    {
+        "id": 6,
+        "titulo": "Tríceps mergulho no banco com perna esticada",
+        "musculos": [3],
+        "execucao": "triceps-mergulho-no-banco-com-perna-esticada.gif"
+    },
+    {
+        "id":7,
+        "titulo": "Meio Sugado",
+        "musculos": [4,5],
+        "execucao": "meio-sugado.jpg"
+    }
+]

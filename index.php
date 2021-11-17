@@ -1,9 +1,23 @@
 <?php require_once 'header.php'; ?>
-<a href="whatsapp/whataspp_open.php" type="button" class="btn btn-success btn-lg btn-block">Whatsapp Web</a>
-<a href="clean_phrase/" type="button" class="btn btn-info btn-lg btn-block">Limpa Caracteres Especiais</a>
-<a href="count/" type="button" class="btn btn-dark btn-lg btn-block">Contador</a>
-<a href="foton/" type="button" class="btn btn-danger btn-lg btn-block">Foton</a>
+<?php require_once $base_view_path . 'menu/search_header.php'; ?>
+
+<?php require_once $base_view_path . 'home/index.php'; ?>
+
+<?php require_once $base_view_path . 'menu/menu_footer.php'; ?>
 <?php require_once 'footer.php'; ?>
 
+<script>
+    addToHomescreen();
+</script>
 
-       
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('<?=$base?>/src/pwa/sw.js')
+            .then(function() {
+                console.log('service worker registered');
+            })
+            .catch(function() {
+                console.warn('service worker failed');
+            });
+    }
+</script>

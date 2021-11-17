@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "descricao": "Peito"
+    },
+    {
+        "id": 2,
+        "descricao": "Ombro"
+    },
+    {
+        "id": 3,
+        "descricao": "Tríceps"
+    },
+    {
+        "id": 4,
+        "descricao": "Aeróbico"
+    },
+    {
+        "id": 5,
+        "descricao": "Perna"
+    }
+
+]
