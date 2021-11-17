@@ -5,6 +5,7 @@
     "background_color": "#297271",
     "display": "standalone",
     "start_url": "/",
+    "prefer_related_applications": false,
     "icons": [
       {
         "src": "assets/img/icon-biceps2.png",
